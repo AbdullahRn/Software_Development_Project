@@ -1,0 +1,82 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <!-- Message -->
+    <p class="message" th:if="${param.message}" th:text="${param.message}"></p>
+
+    <div class="transactions-page">
+
+        <div class="transactions-header">
+            <h1>Transactions</h1>
+
+            <!-- Search Form -->
+            <form class="transaction-search" th:action="@{/transaction}" method="get">
+                <input
+                        name="search"
+                        placeholder="Search transaction ..."
+                        type="text"
+                        th:value="${search}"
+                />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <table class="transactions-table" th:if="${transactions}">
+            <thead>
+            <tr>
+                <th>TYPE</th>
+                <th>STATUS</th>
+                <th>TOTAL PRICE</th>
+                <th>TOTAL PRODUCTS</th>
+                <th>DATE</th>
+                <th>ACTIONS</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="t : ${transactions}">
+                <td th:text="${t.transactionType}"></td>
+                <td th:text="${t.status}"></td>
+                <td th:text="${t.totalPrice}"></td>
+                <td th:text="${t.totalProducts}"></td>
+
+                <td th:text="${#dates.format(t.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+
+                <td>
+                    <a th:href="@{/transaction/{id}(id=${t.id})}">
+                        <button type="button">View Details</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination (Search preserve করার জন্য baseUrl-এ search param  -->
+        <div class="pagination-container" th:if="${totalPages > 1}">
+
+            <!-- Prev -->
+            <a th:if="${currentPage > 1}"
+               th:href="@{/transaction(page=${currentPage - 1}, search=${search})}">
+                <button class="pagination-button">Prev</button>
+            </a>
+
+            <!-- Numbers -->
+            <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a th:href="@{/transaction(page=${i}, search=${search})}">
+                    <button class="pagination-button"
+                            th:classappend="${i == currentPage} ? ' active' : ''"
+                            th:text="${i}">
+                    </button>
+                </a>
+            </span>
+
+            <!-- Next -->
+            <a th:if="${currentPage < totalPages}"
+               th:href="@{/transaction(page=${currentPage + 1}, search=${search})}">
+                <button class="pagination-button">Next</button>
+            </a>
+        </div>
+
+    </div>
+
+</div>

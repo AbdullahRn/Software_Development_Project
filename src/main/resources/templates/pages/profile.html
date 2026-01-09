@@ -1,0 +1,43 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <div class="profile-wrapper">
+        <div class="profile-header">
+            <h2>My Profile</h2>
+            <p>Your account details & information</p>
+        </div>
+
+        <div class="profile-card-pro">
+            <div class="profile-avatar">
+                <span th:text="${#strings.substring(user.name,0,1)}">M</span>
+            </div>
+
+            <h3 th:text="${user.name}">Mushfiq</h3>
+            <p class="profile-role" th:text="${user.role}">ADMIN</p>
+
+            <div class="profile-info-grid">
+
+                <div class="info-item">
+                    <label>Email</label>
+                    <span th:text="${user.email}">example@gmail.com</span>
+                </div>
+
+                <div class="info-item">
+                    <label>Phone</label>
+                    <span th:text="${user.phoneNumber}">017xxxxxxxx</span>
+                </div>
+
+                <div class="info-item">
+                    <label>Role</label>
+                    <span th:text="${user.role}">ADMIN</span>
+                </div>
+
+                <div class="info-item">
+                    <label>Status</label>
+                    <span class="status-badge">Active</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

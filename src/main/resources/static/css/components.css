@@ -1,0 +1,163 @@
+/* ================================
+   Components (Buttons, Inputs, Cards, Tables)
+================================ */
+
+/* Titles */
+h1, h2, h3 {
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+h1 { font-size: 38px; }
+h2 { font-size: 28px; }
+h3 { font-size: 20px; color: var(--muted); }
+
+/* Cards */
+.section-card,
+.profile-card,
+.chart-container,
+.transaction-details-page,
+.product-item,
+.category-item,
+.supplier-item,
+.purchase-form-page,
+.product-form-page {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 10px 30px var(--shadow);
+    margin-bottom: 18px;
+}
+
+/* Buttons */
+button {
+    border-radius: 10px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    background: var(--accent-hover);
+}
+
+/* Delete button */
+.delete-btn,
+button.delete-btn {
+    background: var(--danger);
+}
+
+.delete-btn:hover,
+button.delete-btn:hover {
+    background: var(--danger-hover);
+}
+
+/* Logout button */
+.logout-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    background: transparent;
+    color: var(--danger);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.7);
+}
+
+/* Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+    outline: none;
+    font-size: 15px;
+    margin-top: 8px;
+    margin-bottom: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(20,184,166,0.2);
+}
+
+/* Select Dropdown */
+select {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+select option {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+select option:hover,
+select option:checked {
+    background: #14b8a6 !important;
+    color: #ffffff !important;
+}
+
+/* Messages */
+.message {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(20,184,166,0.12);
+    border: 1px solid rgba(20,184,166,0.25);
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+}
+
+table th {
+    text-align: left;
+    color: var(--muted);
+    font-size: 13px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 12px;
+}
+
+table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(30,41,59,0.6);
+    font-weight: 600;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.pagination button {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.pagination button:hover {
+    background: rgba(20,184,166,0.15);
+    border-color: var(--accent);
+}

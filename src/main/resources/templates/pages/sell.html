@@ -1,0 +1,55 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <!-- Message -->
+    <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
+    <div class="error-message" th:if="${param.error}" th:text="${param.error}"></div>
+
+    <div class="purchase-form-page">
+        <h1>Sell Product</h1>
+
+        <form th:action="@{/sell}" method="post">
+
+            <!-- Product -->
+            <div class="form-group">
+                <label>Select product</label>
+
+                <select name="productId" required>
+                    <option value="">Select a product</option>
+                    <option th:each="product : ${products}"
+                            th:value="${product.id}"
+                            th:text="${product.name}">
+                    </option>
+                </select>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" required />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="description" required />
+            </div>
+
+            <!-- Note -->
+            <div class="form-group">
+                <label>Note</label>
+                <input type="text" name="note" required />
+            </div>
+
+            <button type="submit">Sell Product</button>
+        </form>
+    </div>
+
+    <!-- message auto hide -->
+    <script>
+        setTimeout(() => {
+            const msg = document.querySelector(".message");
+            if (msg) msg.style.display = "none";
+        }, 4000);
+    </script>
+
+</div>

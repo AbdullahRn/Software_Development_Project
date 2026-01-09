@@ -1,0 +1,34 @@
+/* ================================
+   PREMIUM SAAS DARK THEME - IMS
+   Base Styles
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #0b1120;
+    --bg2: #0f172a;
+    --card: #111827;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #14b8a6;
+    --accent-hover: #0f766e;
+    --danger: #ef4444;
+    --danger-hover: #b91c1c;
+    --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}

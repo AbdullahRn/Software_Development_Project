@@ -1,0 +1,104 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <!-- Success/Error Message -->
+    <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
+    <div class="error-message" th:if="${param.error}" th:text="${param.error}"></div>
+
+    <div class="product-form-page">
+
+        <h1 th:text="${isEditing} ? 'Edit Product' : 'Add Product'">Add Product</h1>
+
+        <!-- Add/Edit Product Form -->
+        <form th:action="${isEditing} ? @{/product/update} : @{/product/save}"
+              method="post"
+              enctype="multipart/form-data">
+
+            <!-- Hidden productId for edit -->
+            <input type="hidden" name="id" th:if="${isEditing}" th:value="${product.id}" />
+
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" name="name" th:value="${product != null ? product.name : ''}" required />
+            </div>
+
+            <div class="form-group">
+                <label>Sku</label>
+                <input type="text" name="sku" th:value="${product != null ? product.sku : ''}" required />
+            </div>
+
+            <div class="form-group">
+                <label>Stock Quantity</label>
+                <input type="number" name="stockQuantity" th:value="${product != null ? product.stockQuantity : ''}" required />
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" name="price" th:value="${product != null ? product.price : ''}" required />
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" th:text="${product != null ? product.description : ''}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="categoryId" required>
+                    <option value="">Select a category</option>
+
+                    <option th:each="cat : ${categories}"
+                            th:value="${cat.id}"
+                            th:text="${cat.name}"
+                            th:selected="${product != null and product.categoryId == cat.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Product Image</label>
+                <input type="file" name="imageFile" onchange="previewImage(event)"/>
+
+                <!-- Image Preview -->
+                <img id="previewImg"
+                     th:if="${product != null && product.imageUrl != null}"
+                     th:src="${product.imageUrl}"
+                     class="image-preview"
+                     alt="preview"/>
+
+                <img id="previewImgEmpty" class="image-preview" alt="preview"
+                     style="display:none;" />
+            </div>
+
+            <button type="submit"
+                    th:text="${isEditing} ? 'Edit Product' : 'Add Product'">
+                Add Product
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Preview JS -->
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById("previewImg");
+                const imgEmpty = document.getElementById("previewImgEmpty");
+
+                if (img) {
+                    img.src = e.target.result;
+                    img.style.display = "block";
+                } else {
+                    imgEmpty.src = e.target.result;
+                    imgEmpty.style.display = "block";
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+</div>

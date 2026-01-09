@@ -1,0 +1,32 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     th:fragment="pagination(currentPage, totalPages, baseUrl)">
+
+    <div class="pagination-container" th:if="${totalPages > 1}">
+
+        <!-- Previous -->
+        <a th:href="@{${baseUrl}(page=${currentPage - 1})}"
+           th:if="${currentPage > 1}">
+            <button class="pagination-button">Prev</button>
+        </a>
+
+        <!-- Page Numbers -->
+        <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+
+            <a th:href="@{${baseUrl}(page=${i})}">
+                <button class="pagination-button"
+                        th:classappend="${i == currentPage} ? ' active' : ''"
+                        th:text="${i}">
+                </button>
+            </a>
+
+        </span>
+
+        <!-- Next -->
+        <a th:href="@{${baseUrl}(page=${currentPage + 1})}"
+           th:if="${currentPage < totalPages}">
+            <button class="pagination-button">Next</button>
+        </a>
+
+    </div>
+
+</div>

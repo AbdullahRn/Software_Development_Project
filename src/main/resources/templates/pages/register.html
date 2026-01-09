@@ -1,0 +1,53 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <div class="auth-container">
+        <h2>Register</h2>
+
+        <!-- Message show -->
+        <p class="message" th:if="${param.message}" th:text="${param.message}"></p>
+
+
+        <!-- Validation error message -->
+        <p class="error-message" th:if="${error}" th:text="${error}"></p>
+
+        <!-- Register Form -->
+        <form th:action="@{/register}" method="post">
+
+            <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    required
+            />
+
+            <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+            />
+
+            <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+            />
+
+            <input
+                    type="text"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    required
+            />
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p>
+            Already have an account?
+            <a th:href="@{/login}">Login</a>
+        </p>
+    </div>
+
+</div>

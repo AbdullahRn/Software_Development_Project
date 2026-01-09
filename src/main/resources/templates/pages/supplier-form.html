@@ -1,0 +1,31 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <!-- Message -->
+    <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
+    <div class="error-message" th:if="${param.error}" th:text="${param.error}"></div>
+
+    <div class="supplier-form-page">
+
+        <h1 th:text="${isEditing} ? 'Edit Supplier' : 'Add Supplier'">Add Supplier</h1>
+
+        <form th:action="${isEditing} ? @{/supplier/update} : @{/supplier/save}" method="post">
+
+            <!-- Hidden id for edit -->
+            <input type="hidden" name="id" th:if="${isEditing}" th:value="${supplier.id}"/>
+
+            <div class="form-group">
+                <label>Supplier Name</label>
+                <input type="text" name="name"
+                       th:value="${supplier != null ? supplier.name : ''}"
+                       required />
+            </div>
+
+            <button type="submit" th:text="${isEditing} ? 'Edit Supplier' : 'Add Supplier'">
+                Add Supplier
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,51 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+
+    <!-- Message -->
+    <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
+
+    <div class="product-page">
+
+        <div class="product-header">
+            <h1>Products</h1>
+
+            <a th:href="@{/product/add}">
+                <button class="add-product-btn" type="button">Add Product</button>
+            </a>
+        </div>
+
+        <div class="product-list" th:if="${products}">
+            <div th:each="product : ${products}" class="product-item">
+
+                <img class="product-image"
+                     th:src="${product.imageUrl}"
+                     th:alt="${product.name}"/>
+
+                <div class="product-info">
+                    <h3 class="name" th:text="${product.name}"></h3>
+                    <p class="sku">Sku: <span th:text="${product.sku}"></span></p>
+                    <p class="price">Price: <span th:text="${product.price}"></span></p>
+                    <p class="quantity">Quantity: <span th:text="${product.stockQuantity}"></span></p>
+                </div>
+
+                <div class="product-actions">
+
+                    <a th:href="@{/product/edit/{id}(id=${product.id})}">
+                        <button type="button" class="edit-btn">Edit</button>
+                    </a>
+
+                    <form th:action="@{/product/delete}" method="post"
+                          onsubmit="return confirm('Are you sure you want to delete this Product?');">
+                        <input type="hidden" name="id" th:value="${product.id}"/>
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ✅ Pagination -->
+        <div th:replace="fragments/pagination :: pagination(${currentPage}, ${totalPages}, '/product')"></div>
+
+    </div>
+
+</div>
