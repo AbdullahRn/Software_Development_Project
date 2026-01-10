@@ -1,11 +1,9 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
 
-    <!-- Message -->
     <div class="message" th:if="${message}" th:text="${message}"></div>
 
     <div class="dashboard-page">
 
-        <!-- Button group -->
         <div class="button-group">
             <button type="button" onclick="changeChartData('count')">Total No Of Transactions</button>
             <button type="button" onclick="changeChartData('quantity')">Product Quantity</button>
@@ -14,7 +12,6 @@
 
         <div class="dashboard-content">
 
-            <!-- Filter Section -->
             <div class="filter-section">
                 <label for="month-select">Select Month:</label>
                 <select id="month-select" onchange="reloadChart()">
@@ -41,33 +38,27 @@
                 </select>
             </div>
 
-            <!-- Chart -->
             <div class="chart-section">
                 <div class="chart-container">
                     <h3>Daily Transactions</h3>
-
-                    <!-- Chart.js Canvas -->
                     <canvas id="transactionChart" height="120"></canvas>
+
                     <div class="ai-card">
                         <h3>AI Restock Suggestions</h3>
                         <ul id="restockList"></ul>
                     </div>
-
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- THYMELEAF data -> JS variable -->
     <script th:inline="javascript">
         let transactionData = [[${transactionData}]];
     </script>
 
-    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Chart render script -->
     <script>
         let selectedKey = "amount";
         let chart;
@@ -80,7 +71,7 @@
 
             const ctx = document.getElementById('transactionChart').getContext('2d');
 
-            if(chart) {
+            if (chart) {
                 chart.destroy();
             }
 
@@ -103,14 +94,12 @@
         }
 
         function reloadChart() {
-            // Phase-1 dummy: just rebuild
             buildChart(selectedKey);
         }
 
-        // Init default chart
         buildChart("amount");
     </script>
-    <script src="/js/dashboard-ai.js"></script>
 
+    <script src="/js/dashboard-ai.js"></script>
 
 </div>

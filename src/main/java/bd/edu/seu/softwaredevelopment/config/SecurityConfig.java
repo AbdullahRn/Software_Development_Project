@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/register", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/api/ml/**", "/api/ai/**", "/api/analytics/**").permitAll()
                         .requestMatchers("/dashboard-seller/**").hasRole("SELLER")
                         .requestMatchers("/dashboard-supplier/**").hasRole("SUPPLIER")
                         .anyRequest().authenticated()
