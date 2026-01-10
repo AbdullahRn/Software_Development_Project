@@ -48,6 +48,11 @@
 
                     <!-- Chart.js Canvas -->
                     <canvas id="transactionChart" height="120"></canvas>
+                    <div class="ai-card">
+                        <h3>AI Restock Suggestions</h3>
+                        <ul id="restockList"></ul>
+                    </div>
+
                 </div>
             </div>
 
@@ -105,5 +110,7 @@
         // Init default chart
         buildChart("amount");
     </script>
+    <script src="/js/dashboard-ai.js"></script>
+
 
 </div>

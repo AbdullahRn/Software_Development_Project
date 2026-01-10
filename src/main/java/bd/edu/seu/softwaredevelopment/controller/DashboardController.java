@@ -3,18 +3,29 @@ package bd.edu.seu.softwaredevelopment.controller;
 import bd.edu.seu.softwaredevelopment.interfaces.PredictionServiceInterface;
 import bd.edu.seu.softwaredevelopment.models.User;
 import bd.edu.seu.softwaredevelopment.services.UserService;
+import bd.edu.seu.softwaredevelopment.dto.AiForecastResponseDto;
+import bd.edu.seu.softwaredevelopment.dto.RestockPredictionDto;
+import bd.edu.seu.softwaredevelopment.services.AiPredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+
 @Controller
 public class DashboardController { // Removed class-level mapping
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PredictionServiceInterface predictionService;
+
+    private final UserService userService;
+    private final PredictionServiceInterface predictionService;
+    private final AiPredictionService aiPredictionService;
+
+    public DashboardController(UserService userService, PredictionServiceInterface predictionService,AiPredictionService aiPredictionService) {
+        this.userService = userService;
+        this.predictionService = predictionService;
+        this.aiPredictionService = aiPredictionService;
+    }
 
     @GetMapping("/dashboard-seller")
     public String sellerDashboard(Model model) {

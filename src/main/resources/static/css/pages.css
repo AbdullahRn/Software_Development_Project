@@ -74,3 +74,16 @@
         margin: 80px auto;
     }
 }
+
+.ai-card {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.12);
+}
+
+.ai-card ul {
+    padding-left: 18px;
+}
+
