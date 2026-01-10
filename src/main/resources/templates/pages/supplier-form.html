@@ -1,31 +1,78 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Supplier Form</title>
+</head>
+<body>
 
-    <!-- Message -->
-    <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
+<div th:fragment="content">
+
     <div class="error-message" th:if="${param.error}" th:text="${param.error}"></div>
+    <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
 
     <div class="supplier-form-page">
+        <h2 th:text="${isEditing} ? 'Update Supplier Information' : 'Register New Supplier'">Supplier Form</h2>
+        <hr/>
 
-        <h1 th:text="${isEditing} ? 'Edit Supplier' : 'Add Supplier'">Add Supplier</h1>
+        <form th:action="@{/supplier/save}" method="post">
 
-        <form th:action="${isEditing} ? @{/supplier/update} : @{/supplier/save}" method="post">
-
-            <!-- Hidden id for edit -->
-            <input type="hidden" name="id" th:if="${isEditing}" th:value="${supplier.id}"/>
+            <input type="hidden" name="id" th:if="${isEditing}" th:value="${supplier != null ? supplier.id : ''}" />
 
             <div class="form-group">
-                <label>Supplier Name</label>
-                <input type="text" name="name"
+                <label for="name">Supplier Name</label>
+                <input type="text"
+                       id="name"
+                       name="name"
+                       class="form-control"
                        th:value="${supplier != null ? supplier.name : ''}"
+                       placeholder="Enter supplier name"
                        required />
             </div>
 
-            <button type="submit" th:text="${isEditing} ? 'Edit Supplier' : 'Add Supplier'">
-                Add Supplier
-            </button>
+            <div class="form-group">
+                <label for="contactInfo">Contact Information</label>
+                <input type="text"
+                       id="contactInfo"
+                       name="contactInfo"
+                       class="form-control"
+                       th:value="${supplier != null ? supplier.contactInfo : ''}"
+                       placeholder="Phone number or email"
+                       required />
+            </div>
 
+            <div class="form-group">
+                <label for="address">Business Address</label>
+                <textarea id="address"
+                          name="address"
+                          class="form-control"
+                          rows="3"
+                          th:text="${supplier != null ? supplier.address : ''}"
+                          placeholder="Full office address"
+                          required></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit"
+                        class="btn-save"
+                        th:text="${isEditing} ? 'Update Supplier' : 'Save Supplier'">
+                    Save
+                </button>
+                <a th:href="@{/supplier}" class="btn-cancel">Cancel</a>
+            </div>
         </form>
-
     </div>
 
+    <script>
+        setTimeout(() => {
+            const msg = document.querySelector(".message");
+            const err = document.querySelector(".error-message");
+            if (msg) msg.style.display = "none";
+            if (err) err.style.display = "none";
+        }, 5000);
+    </script>
+
 </div>
+
+</body>
+</html>

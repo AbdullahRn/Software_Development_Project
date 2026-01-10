@@ -1,0 +1,43 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+    <div class="dashboard-page">
+        <h2 style="color: #27ae60;">Supplier Dashboard</h2>
+
+        <div class="button-group">
+            <button type="button" onclick="changeChartData('count')">Orders Received</button>
+            <button type="button" onclick="changeChartData('quantity')">Stock Supplied</button>
+            <button type="button" onclick="changeChartData('amount')">Total Billing</button>
+        </div>
+
+        <div class="chart-section">
+            <canvas id="transactionChart" height="120"></canvas>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        let transactionData = [[${transactionData}]];
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chart;
+        function buildChart(key) {
+            const labels = transactionData.map(item => item.day);
+            const values = transactionData.map(item => item[key]);
+            const ctx = document.getElementById('transactionChart').getContext('2d');
+            if(chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Supplier ' + key.toUpperCase(),
+                        data: values,
+                        borderColor: '#27ae60',
+                        fill: false
+                    }]
+                }
+            });
+        }
+        buildChart("amount");
+    </script>
+</div>

@@ -1,0 +1,16 @@
+package bd.edu.seu.softwaredevelopment.repositories;
+
+import bd.edu.seu.softwaredevelopment.models.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface UserRepository extends MongoRepository<User, String> {
+    Optional<User> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+    List<User> findByRole(User.Role role);
+
+    Optional<User> findByName(String name);
+}
