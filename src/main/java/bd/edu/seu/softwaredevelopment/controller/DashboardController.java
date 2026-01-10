@@ -38,4 +38,16 @@ public class DashboardController { // Removed class-level mapping
         model.addAttribute("transactionData", predictionService.getFormattedGraphData(null));
         return "layout";
     }
+
+    @GetMapping("/dashboard")
+    public String dashboardRedirect() {
+        User user = userService.getCurrentLoggedInUser();
+        if (user == null) return "redirect:/login";
+
+        if (user.getRole() == User.Role.SELLER) return "redirect:/dashboard-seller";
+        if (user.getRole() == User.Role.SUPPLIER) return "redirect:/dashboard-supplier";
+
+        return "redirect:/login?error=unauthorized";
+    }
+
 }
