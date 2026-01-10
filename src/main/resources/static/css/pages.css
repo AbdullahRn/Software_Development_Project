@@ -87,3 +87,63 @@
     padding-left: 18px;
 }
 
+/* ================================
+   Product Page Fix (Prevent Jumping)
+================================ */
+
+.product-page {
+    width: 100%;
+    padding: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* each product row */
+.product-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+    /* important to prevent jumping */
+    min-height: 120px;
+}
+
+/* fixed image size prevents layout shift */
+.product-image {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* info section */
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* buttons aligned properly */
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.product-actions button {
+    width: 90px;
+}
+
+

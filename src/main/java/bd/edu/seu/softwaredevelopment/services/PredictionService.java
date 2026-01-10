@@ -13,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -86,7 +89,53 @@ public class PredictionService implements PredictionServiceInterface {
 
     @Override
     public List<Map<String, Object>> getFormattedGraphData(String productId) {
-        return null;
+
+        List<Transaction> transactions;
+
+        // ✅ If productId is null → return ALL transactions
+        if (productId == null || productId.isBlank()) {
+            transactions = transactionRepository.findAll();
+        } else {
+            transactions = transactionRepository.findByProductId(productId);
+        }
+
+        // ✅ If DB empty, return empty list instead of null
+        if (transactions == null || transactions.isEmpty()) {
+            return List.of();
+        }
+
+        // ✅ Group by saleDate and calculate count, quantity, amount
+        return transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::getSaleDate))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey()) // sort by date
+                .map(entry -> {
+
+                    LocalDate date = entry.getKey();
+                    List<Transaction> txList = entry.getValue();
+
+                    int count = txList.size();
+                    int quantity = txList.stream().mapToInt(Transaction::getTotalProducts).sum();
+
+                    double amount = txList.stream()
+                            .map(Transaction::getTotalPrice)
+                            .filter(Objects::nonNull)
+                            .mapToDouble(BigDecimal::doubleValue)
+                            .sum();
+
+                    // ✅ Use HashMap to avoid Map.of inference errors
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("day", date.toString());
+                    data.put("count", count);
+                    data.put("quantity", quantity);
+                    data.put("amount", amount);
+
+                    return data;
+                })
+                .collect(Collectors.toList());
     }
+
+
 }
 

@@ -35,7 +35,10 @@ public class DashboardController { // Removed class-level mapping
         model.addAttribute("title", "Seller Dashboard");
         model.addAttribute("content", "pages/dashboard-seller :: content");
         model.addAttribute("suggestions", predictionService.getProactiveSuggestions(user.getId()));
-        model.addAttribute("transactionData", predictionService.getFormattedGraphData(null));
+
+        var data = predictionService.getFormattedGraphData(user.getId());
+        model.addAttribute("transactionData", data == null ? java.util.Collections.emptyList() : data);
+
         return "layout";
     }
 
@@ -46,9 +49,13 @@ public class DashboardController { // Removed class-level mapping
 
         model.addAttribute("title", "Supplier Dashboard");
         model.addAttribute("content", "pages/dashboard-supplier :: content");
-        model.addAttribute("transactionData", predictionService.getFormattedGraphData(null));
+
+        var data = predictionService.getFormattedGraphData(user.getId());
+        model.addAttribute("transactionData", data == null ? java.util.Collections.emptyList() : data);
+
         return "layout";
     }
+
 
     @GetMapping("/dashboard")
     public String dashboardRedirect() {

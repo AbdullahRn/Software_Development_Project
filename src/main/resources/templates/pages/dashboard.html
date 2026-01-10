@@ -53,53 +53,17 @@
         </div>
     </div>
 
-    <script th:inline="javascript">
-        let transactionData = [[${transactionData}]];
-    </script>
-
+    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-        let selectedKey = "amount";
-        let chart;
-
-        function buildChart(key) {
-            selectedKey = key;
-
-            const labels = transactionData.map(item => item.day);
-            const values = transactionData.map(item => item[key]);
-
-            const ctx = document.getElementById('transactionChart').getContext('2d');
-
-            if (chart) {
-                chart.destroy();
-            }
-
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: key.toUpperCase(),
-                        data: values,
-                        borderWidth: 2,
-                        fill: false
-                    }]
-                }
-            });
-        }
-
-        function changeChartData(key) {
-            buildChart(key);
-        }
-
-        function reloadChart() {
-            buildChart(selectedKey);
-        }
-
-        buildChart("amount");
+    <!-- Provide JSON-safe data -->
+    <script th:inline="javascript">
+        window.transactionData = /*[[${transactionData}]]*/ [];
     </script>
 
+    <!-- Load chart + AI scripts -->
+    <script src="/js/dashboard-chart.js"></script>
     <script src="/js/dashboard-ai.js"></script>
+
 
 </div>

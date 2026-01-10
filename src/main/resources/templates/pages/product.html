@@ -16,7 +16,7 @@
             <div th:each="product : ${products}" class="product-item">
 
                 <img class="product-image"
-                     th:src="@{'/images/' + ${product.sku} + '.png'}"
+                     th:src="${product.sku != null} ? @{/images/{sku}.png(sku=${product.sku})} : @{/images/default-product.png}"
                      th:alt="${product.name}"
                      onerror="this.src='/images/default-product.png'"/>
 

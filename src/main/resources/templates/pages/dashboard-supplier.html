@@ -15,7 +15,7 @@
     </div>
 
     <script th:inline="javascript">
-        let transactionData = [[${transactionData}]];
+        let transactionData = [[${transactionData}]] || [];
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

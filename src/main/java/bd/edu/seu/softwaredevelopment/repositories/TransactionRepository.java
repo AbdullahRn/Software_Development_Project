@@ -14,5 +14,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 
     List<Transaction> findByUserId(String userId);
     List<Transaction> findByProductIdAndSaleDateBetweenOrderBySaleDateAsc(String productId, LocalDate start, LocalDate end);
+    List<Transaction> findByProductId(String productId);
+
 }
 
