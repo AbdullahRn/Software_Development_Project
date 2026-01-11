@@ -25,11 +25,14 @@ import java.util.stream.Collectors;
 public class PredictionService implements PredictionServiceInterface {
 
     @Autowired
-    private WebClient mlWebClient; // Configured to http://localhost:8000 [cite: 846]
+    private WebClient mlWebClient; // Configured to http://localhost:8000
+
     @Autowired
     private PredictionRepository predictionRepository;
+
     @Autowired
     private TransactionRepository transactionRepository;
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -38,7 +41,6 @@ public class PredictionService implements PredictionServiceInterface {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        // Build feature data: last 7 days of sales [cite: 802, 1038]
         LocalDate sevenDaysAgo = LocalDate.now().minusDays(7);
         List<Transaction> recentSales = transactionRepository
                 .findByProductIdAndSaleDateBetweenOrderBySaleDateAsc(productId, sevenDaysAgo, LocalDate.now());
@@ -47,17 +49,15 @@ public class PredictionService implements PredictionServiceInterface {
                 .map(Transaction::getTotalProducts)
                 .collect(Collectors.toList());
 
-        // Prepare JSON Request for Python [cite: 1029]
         PredictionRequest request = new PredictionRequest();
         request.setOwnerId(ownerId);
         request.setProductId(productId);
         request.setPredictionDate(predictionDate);
         request.setUnitPrice(product.getPrice().doubleValue());
         request.setLast7DaysUnits(last7DaysUnits);
-        request.setDiscount(0.0); // Default or fetch from latest promo
+        request.setDiscount(0.0);
         request.setPromotion(false);
 
-        // Call Python ML API [cite: 940, 957]
         PredictionResponse response = mlWebClient.post()
                 .uri("/predict")
                 .bodyValue(request)
@@ -65,7 +65,6 @@ public class PredictionService implements PredictionServiceInterface {
                 .bodyToMono(PredictionResponse.class)
                 .block();
 
-        // Save result as Prediction [cite: 959, 970]
         Prediction prediction = new Prediction();
         prediction.setProductId(productId);
         prediction.setOwnerId(ownerId);
@@ -87,36 +86,41 @@ public class PredictionService implements PredictionServiceInterface {
         return null;
     }
 
+    // ✅ FIXED: Use userId/supplierId instead of productId
     @Override
-    public List<Map<String, Object>> getFormattedGraphData(String productId) {
+    public List<Map<String, Object>> getFormattedGraphData(String userId, boolean isSupplier) {
 
         List<Transaction> transactions;
 
-        // ✅ If productId is null → return ALL transactions
-        if (productId == null || productId.isBlank()) {
+        // If userId empty => show all (safe fallback)
+        if (userId == null || userId.isBlank()) {
             transactions = transactionRepository.findAll();
         } else {
-            transactions = transactionRepository.findByProductId(productId);
+            // Seller = transactions created by this user
+            // Supplier = transactions assigned to this supplier
+            transactions = isSupplier
+                    ? transactionRepository.findBySupplierId(userId)
+                    : transactionRepository.findByUserId(userId);
         }
 
-        // ✅ If DB empty, return empty list instead of null
         if (transactions == null || transactions.isEmpty()) {
             return List.of();
         }
 
-        // ✅ Group by saleDate and calculate count, quantity, amount
+        // Group by saleDate and calculate count, quantity, amount
         return transactions.stream()
+                .filter(t -> t.getSaleDate() != null) // avoid null dates breaking grouping
                 .collect(Collectors.groupingBy(Transaction::getSaleDate))
                 .entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByKey()) // sort by date
+                .sorted(Map.Entry.comparingByKey())
                 .map(entry -> {
 
                     LocalDate date = entry.getKey();
                     List<Transaction> txList = entry.getValue();
 
                     int count = txList.size();
-                    int quantity = txList.stream().mapToInt(Transaction::getTotalProducts).sum();
+                    int quantity = txList.stream().mapToInt(t -> t.getTotalProducts() == null ? 0 : t.getTotalProducts()).sum();
 
                     double amount = txList.stream()
                             .map(Transaction::getTotalPrice)
@@ -124,7 +128,6 @@ public class PredictionService implements PredictionServiceInterface {
                             .mapToDouble(BigDecimal::doubleValue)
                             .sum();
 
-                    // ✅ Use HashMap to avoid Map.of inference errors
                     Map<String, Object> data = new HashMap<>();
                     data.put("day", date.toString());
                     data.put("count", count);
@@ -135,7 +138,4 @@ public class PredictionService implements PredictionServiceInterface {
                 })
                 .collect(Collectors.toList());
     }
-
-
 }
-

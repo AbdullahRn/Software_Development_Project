@@ -13,8 +13,11 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
     List<Transaction> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 
     List<Transaction> findByUserId(String userId);
+
+    // ✅ ADD THIS for Supplier dashboard graph
+    List<Transaction> findBySupplierId(String supplierId);
+
     List<Transaction> findByProductIdAndSaleDateBetweenOrderBySaleDateAsc(String productId, LocalDate start, LocalDate end);
+
     List<Transaction> findByProductId(String productId);
-
 }
-

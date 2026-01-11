@@ -3,25 +3,21 @@ package bd.edu.seu.softwaredevelopment.controller;
 import bd.edu.seu.softwaredevelopment.interfaces.PredictionServiceInterface;
 import bd.edu.seu.softwaredevelopment.models.User;
 import bd.edu.seu.softwaredevelopment.services.UserService;
-import bd.edu.seu.softwaredevelopment.dto.AiForecastResponseDto;
-import bd.edu.seu.softwaredevelopment.dto.RestockPredictionDto;
 import bd.edu.seu.softwaredevelopment.services.AiPredictionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
 @Controller
-public class DashboardController { // Removed class-level mapping
-
+public class DashboardController {
 
     private final UserService userService;
     private final PredictionServiceInterface predictionService;
     private final AiPredictionService aiPredictionService;
 
-    public DashboardController(UserService userService, PredictionServiceInterface predictionService,AiPredictionService aiPredictionService) {
+    public DashboardController(UserService userService,
+                               PredictionServiceInterface predictionService,
+                               AiPredictionService aiPredictionService) {
         this.userService = userService;
         this.predictionService = predictionService;
         this.aiPredictionService = aiPredictionService;
@@ -36,8 +32,8 @@ public class DashboardController { // Removed class-level mapping
         model.addAttribute("content", "pages/dashboard-seller :: content");
         model.addAttribute("suggestions", predictionService.getProactiveSuggestions(user.getId()));
 
-        var data = predictionService.getFormattedGraphData(user.getId());
-        model.addAttribute("transactionData", data == null ? java.util.Collections.emptyList() : data);
+        var data = predictionService.getFormattedGraphData(user.getId(), false);
+        model.addAttribute("transactionData", data);
 
         return "layout";
     }
@@ -50,12 +46,11 @@ public class DashboardController { // Removed class-level mapping
         model.addAttribute("title", "Supplier Dashboard");
         model.addAttribute("content", "pages/dashboard-supplier :: content");
 
-        var data = predictionService.getFormattedGraphData(user.getId());
-        model.addAttribute("transactionData", data == null ? java.util.Collections.emptyList() : data);
+        var data = predictionService.getFormattedGraphData(user.getId(), true);
+        model.addAttribute("transactionData", data);
 
         return "layout";
     }
-
 
     @GetMapping("/dashboard")
     public String dashboardRedirect() {
@@ -67,5 +62,4 @@ public class DashboardController { // Removed class-level mapping
 
         return "redirect:/login?error=unauthorized";
     }
-
 }
