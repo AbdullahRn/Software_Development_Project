@@ -1,21 +1,64 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <div class="message" th:if="${message}" th:text="${message}"></div>
-    <div class="dashboard-page">
-        <h2 style="color: #3498db;">Seller Dashboard</h2>
 
-        <div class="alert alert-info" th:if="${suggestions != null}">
+    <div class="dashboard-page">
+        <h2 style="color:#3498db;">Seller Dashboard</h2>
+
+        <!-- ===== Forecast Summary (Next Month / Next Year) ===== -->
+        <div class="alert alert-info" th:if="${forecast != null}">
+            <h4>
+                Estimated Sales
+                <small>(Based on last <span th:text="${forecast.basisMonthsUsed}">0</span> month(s))</small>
+            </h4>
+
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                <div style="border:1px solid #ddd; padding:12px; border-radius:8px; min-width:240px;">
+                    <b>Next Month</b>
+                    <div>
+                        Estimated Quantity:
+                        <b th:text="${forecast.estimatedNextMonthQuantity}">0</b>
+                    </div>
+                    <div>
+                        Estimated Revenue:
+                        <b th:text="${#numbers.formatDecimal(forecast.estimatedNextMonthSales, 1, 'COMMA', 2, 'POINT')}">0</b>
+                    </div>
+                </div>
+
+                <div style="border:1px solid #ddd; padding:12px; border-radius:8px; min-width:240px;">
+                    <b>Next Year</b>
+                    <div>
+                        Estimated Quantity:
+                        <b th:text="${forecast.estimatedNextYearQuantity}">0</b>
+                    </div>
+                    <div>
+                        Estimated Revenue:
+                        <b th:text="${#numbers.formatDecimal(forecast.estimatedNextYearSales, 1, 'COMMA', 2, 'POINT')}">0</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== If forecast not available ===== -->
+        <div class="alert alert-warning" th:if="${forecast == null}">
+            Forecast is not available. (Backend didn’t send it yet.)
+        </div>
+
+        <!-- ===== Proactive Suggestions ===== -->
+        <div class="alert alert-info" th:if="${suggestions != null and !#lists.isEmpty(suggestions)}">
             <h4>Proactive Inventory Alerts</h4>
             <ul>
                 <li th:each="s : ${suggestions}" th:text="${s}"></li>
             </ul>
         </div>
 
+        <!-- ===== Chart Buttons ===== -->
         <div class="button-group">
             <button type="button" onclick="changeChartData('count')">Transaction Count</button>
             <button type="button" onclick="changeChartData('quantity')">Units Sold</button>
             <button type="button" onclick="changeChartData('amount')">Revenue</button>
         </div>
 
+        <!-- ===== Chart ===== -->
         <div class="chart-section">
             <canvas id="transactionChart" height="120"></canvas>
         </div>
@@ -23,10 +66,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Make transactionData available to dashboard-chart.js -->
     <script th:inline="javascript">
         window.transactionData = /*[[${transactionData}]]*/ [];
     </script>
 
     <script src="/js/dashboard-chart.js"></script>
-
 </div>

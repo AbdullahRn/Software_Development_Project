@@ -14,7 +14,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 
     List<Transaction> findByUserId(String userId);
 
-    // ✅ ADD THIS for Supplier dashboard graph
+    // ✅ Needed for supplier dashboard forecast
     List<Transaction> findBySupplierId(String supplierId);
 
     List<Transaction> findByProductIdAndSaleDateBetweenOrderBySaleDateAsc(String productId, LocalDate start, LocalDate end);
