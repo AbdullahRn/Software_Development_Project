@@ -1,7 +1,7 @@
-id,name,description,createdAt
-CAT1,Category 1,Auto-generated category 1,2026-01-10T22:15:11.527633
-CAT2,Category 2,Auto-generated category 2,2026-01-10T22:15:11.527656
-CAT3,Category 3,Auto-generated category 3,2026-01-10T22:15:11.527663
-CAT4,Category 4,Auto-generated category 4,2026-01-10T22:15:11.527668
-CAT5,Category 5,Auto-generated category 5,2026-01-10T22:15:11.527673
-CAT6,Category 6,Auto-generated category 6,2026-01-10T22:15:11.527679
+id,name
+CAT1,Category 1
+CAT2,Category 2
+CAT3,Category 3
+CAT4,Category 4
+CAT5,Category 5
+CAT6,Category 6

@@ -14,30 +14,12 @@
         </div>
     </div>
 
-    <script th:inline="javascript">
-        let transactionData = [[${transactionData}]] || [];
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        let chart;
-        function buildChart(key) {
-            const labels = transactionData.map(item => item.day);
-            const values = transactionData.map(item => item[key]);
-            const ctx = document.getElementById('transactionChart').getContext('2d');
-            if(chart) chart.destroy();
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Supplier ' + key.toUpperCase(),
-                        data: values,
-                        borderColor: '#27ae60',
-                        fill: false
-                    }]
-                }
-            });
-        }
-        buildChart("amount");
+
+    <script th:inline="javascript">
+        window.transactionData = /*[[${transactionData}]]*/ [];
     </script>
+
+    <script src="/js/dashboard-chart.js"></script>
+
 </div>

@@ -40,7 +40,7 @@
                 <td th:text="${t.totalPrice}"></td>
                 <td th:text="${t.totalProducts}"></td>
 
-                <td th:text="${#dates.format(t.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(t.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
 
                 <td>
                     <a th:href="@{/transaction/{id}(id=${t.id})}">

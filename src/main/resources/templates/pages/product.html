@@ -1,5 +1,152 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
 
+    <style>
+        /* ==============================
+           ✅ KEEP PAGE BACKGROUND DEFAULT
+           (No background override here)
+           ============================== */
+
+        /* ---------- Header Section (NOW DARK) ---------- */
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #2b2f3a;  /* ✅ Dark background */
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .product-header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+            color: #f2f2f2;  /* ✅ Light text */
+        }
+
+        /* ---------- Add Button ---------- */
+        .add-product-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            background: #007bff;
+            color: white;
+            transition: 0.2s ease-in-out;
+        }
+
+        .add-product-btn:hover {
+            background: #005fd1;
+        }
+
+        /* ---------- Product Card List ---------- */
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* ✅ Darker product card */
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 22px;
+            border-radius: 12px;
+            background: #2b2f3a;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            transition: 0.15s ease-in-out;
+        }
+
+        .product-item:hover {
+            transform: scale(1.01);
+            background: #34394a;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+        }
+
+        /* ---------- Product Info ---------- */
+        .product-info h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #f2f2f2;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 14px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* ✅ Dark pill style meta info */
+        .product-meta p {
+            margin: 0;
+            font-size: 14px;
+            color: #e1e1e1;
+            background: rgba(255,255,255,0.08);
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
+        .product-meta .label {
+            font-weight: 700;
+            color: #ffffff;
+            margin-right: 5px;
+        }
+
+        /* ---------- Buttons ---------- */
+        .product-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            min-width: 90px;
+            transition: 0.2s;
+        }
+
+        .edit-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #1f8837;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #b72b38;
+        }
+
+        /* ---------- Message ---------- */
+        .message {
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            background: rgba(0, 123, 255, 0.12);
+            border: 1px solid rgba(0, 123, 255, 0.25);
+            color: #cfe9ff;
+        }
+    </style>
+
     <div class="message" th:if="${param.message}" th:text="${param.message}"></div>
 
     <div class="product-page">
@@ -15,16 +162,25 @@
         <div class="product-list" th:if="${products}">
             <div th:each="product : ${products}" class="product-item">
 
-                <img class="product-image"
-                     th:src="${product.sku != null} ? @{/images/{sku}.png(sku=${product.sku})} : @{/images/default-product.png}"
-                     th:alt="${product.name}"
-                     onerror="this.src='/images/default-product.png'"/>
-
                 <div class="product-info">
-                    <h3 class="name" th:text="${product.name}"></h3>
-                    <p class="sku">Sku: <span th:text="${product.sku}"></span></p>
-                    <p class="price">Price: <span th:text="${product.unitPrice}"></span></p>
-                    <p class="quantity">Quantity: <span th:text="${product.stockQuantity}"></span></p>
+                    <h3 th:text="${product.name}"></h3>
+
+                    <div class="product-meta">
+                        <p>
+                            <span class="label">SKU:</span>
+                            <span th:text="${product.sku}"></span>
+                        </p>
+
+                        <p>
+                            <span class="label">Price:</span>
+                            <span th:text="${product.unitPrice}"></span>
+                        </p>
+
+                        <p>
+                            <span class="label">Stock:</span>
+                            <span th:text="${product.stockQuantity}"></span>
+                        </p>
+                    </div>
                 </div>
 
                 <div class="product-actions">
@@ -40,6 +196,7 @@
                     </form>
 
                 </div>
+
             </div>
         </div>
 

@@ -1,11 +1,17 @@
-id,username,password,role,email,createdAt
-USR1,user1,123456,ADMIN,user1@demo.com,2026-01-10T22:15:11.543210
-USR2,user2,123456,STAFF,user2@demo.com,2026-01-10T22:15:11.543222
-USR3,user3,123456,STAFF,user3@demo.com,2026-01-10T22:15:11.543227
-USR4,user4,123456,STAFF,user4@demo.com,2026-01-10T22:15:11.543231
-USR5,user5,123456,STAFF,user5@demo.com,2026-01-10T22:15:11.543234
-USR6,user6,123456,STAFF,user6@demo.com,2026-01-10T22:15:11.543238
-USR7,user7,123456,STAFF,user7@demo.com,2026-01-10T22:15:11.543241
-USR8,user8,123456,STAFF,user8@demo.com,2026-01-10T22:15:11.543245
-USR9,user9,123456,STAFF,user9@demo.com,2026-01-10T22:15:11.543248
-USR10,user10,123456,STAFF,user10@demo.com,2026-01-10T22:15:11.543252
+id,name,email,password,phoneNumber,address,role,createdAt
+SUP1,supplier1,supplier1@demo.com,123456,(242)410-0710,"570 Catherine Plaza, New Sarahland, MH 10055",SUPPLIER,2026-01-10T22:55:11.540912
+SUP2,supplier2,supplier2@demo.com,123456,205.575.6766x284,"55081 Kara Fields, Erinberg, NH 85364",SUPPLIER,2026-01-10T22:55:11.541300
+SUP3,supplier3,supplier3@demo.com,123456,(891)739-6203,"32747 Kathy Burg Apt. 149, South Kimberly, NE 62047",SUPPLIER,2026-01-10T22:55:11.541656
+SUP4,supplier4,supplier4@demo.com,123456,+1-916-628-0637,"84703 Winters Field Apt. 432, South Samanthatown, GU 48298",SUPPLIER,2026-01-10T22:55:11.542104
+SUP5,supplier5,supplier5@demo.com,123456,884-884-9720,"05290 Melissa Springs Suite 627, West Levi, HI 93827",SUPPLIER,2026-01-10T22:55:11.542460
+SUP6,supplier6,supplier6@demo.com,123456,001-541-763-8921x9683,"596 Melanie Spur Suite 660, West Eric, GA 89386",SUPPLIER,2026-01-10T22:55:11.542848
+USR1,user1,user1@demo.com,123456,(814)450-1654,"06306 Victoria Track, North Brianport, MN 80772",SELLER,2026-01-10T22:55:11.543494
+USR2,user2,user2@demo.com,123456,(428)353-2406,"8873 Price Extension Apt. 305, North Heather, HI 71064",SELLER,2026-01-10T22:55:11.543957
+USR3,user3,user3@demo.com,123456,001-686-418-8499x487,"0323 Michael Avenue Apt. 202, South Patriciafort, IA 17734",SELLER,2026-01-10T22:55:11.544323
+USR4,user4,user4@demo.com,123456,381.935.3886x8842,"692 Casey Orchard, East Matthewtown, MO 05266",SELLER,2026-01-10T22:55:11.544663
+USR5,user5,user5@demo.com,123456,493-481-0463,"514 Hodges Rapid Suite 854, Zacharyland, AS 30503",SELLER,2026-01-10T22:55:11.545088
+USR6,user6,user6@demo.com,123456,947-689-0200,"861 Brown Common Suite 340, Port Jeffrey, MD 02885",SELLER,2026-01-10T22:55:11.545482
+USR7,user7,user7@demo.com,123456,(663)778-4623,"USNV Walker, FPO AA 79627",SELLER,2026-01-10T22:55:11.545721
+USR8,user8,user8@demo.com,123456,367-249-9688x413,"6896 Cooper Neck Suite 151, North Paulmouth, CO 06311",SELLER,2026-01-10T22:55:11.546136
+USR9,user9,user9@demo.com,123456,(700)937-5197,"523 George Ville, Figueroastad, OH 65645",SELLER,2026-01-10T22:55:11.546514
+USR10,user10,user10@demo.com,123456,714-601-3709,"934 Chan Passage Apt. 271, New Belinda, AL 64548",SELLER,2026-01-10T22:55:11.546929

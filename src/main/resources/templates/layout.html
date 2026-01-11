@@ -5,21 +5,20 @@
     <title th:text="${title}">IMS</title>
 
     <link rel="stylesheet" th:href="@{/css/app.css}">
-
 </head>
 
 <body>
 
 <div class="layout">
 
-    <!-- Sidebar -->
-    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <!-- ✅ Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-    <!-- Main content -->
+    <!-- ✅ Main content -->
     <div class="main-content">
 
-        <!-- FIXED DYNAMIC CONTENT LOADER -->
-        <div th:replace="~{__${content}__}"></div>
+        <!-- ✅ Correct Dynamic Fragment Loader -->
+        <div th:replace="~{${content}}"></div>
 
     </div>
 

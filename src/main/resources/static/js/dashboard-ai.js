@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("http://127.0.0.1:8000/predict/restock")
+    fetch("/api/ai/restock")
         .then(res => res.json())
         .then(data => {
             const list = document.getElementById("restockList");
@@ -14,11 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             data.forEach(item => {
                 const li = document.createElement("li");
-                li.innerText = `${item.productName} → Restock ${item.recommendedQty} (Stock out in ${item.daysUntilStockOut} days)`;
+
+                li.innerText =
+                    `${item.productName} | Stock: ${item.currentStock} | ` +
+                    `Stockout in ${item.predictedDaysUntilStockout} days | ` +
+                    `Reorder: ${item.recommendedReorderQty} | ` +
+                    `Confidence: ${(item.confidence * 100).toFixed(0)}%`;
+
                 list.appendChild(li);
             });
         })
-        .catch(err => {
-            console.error("AI fetch error:", err);
-        });
+        .catch(err => console.error("AI fetch error:", err));
 });

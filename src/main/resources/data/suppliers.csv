@@ -1,7 +1,7 @@
-id,name,email,phone,address,createdAt
-SUP1,Supplier 1,supplier1@demo.com,001-301-529-9461,"542 Taylor Rapids, Lake Andrew, LA 31157",2026-01-10T22:15:11.540088
-SUP2,Supplier 2,supplier2@demo.com,001-952-643-4303x686,"51334 Flores Ridges Suite 889, North Kenneth, NE 32200",2026-01-10T22:15:11.540365
-SUP3,Supplier 3,supplier3@demo.com,796-240-5732x12795,"23350 William Forge, Leeberg, CO 36259",2026-01-10T22:15:11.540611
-SUP4,Supplier 4,supplier4@demo.com,(379)226-2106x71943,"2924 Roy Rapid Apt. 159, Brownmouth, UT 04727",2026-01-10T22:15:11.540908
-SUP5,Supplier 5,supplier5@demo.com,001-404-285-4175x330,"014 Steven Wall, Nguyentown, MA 59930",2026-01-10T22:15:11.541146
-SUP6,Supplier 6,supplier6@demo.com,001-747-222-5618,"05475 Chapman Walk Apt. 844, Davishaven, MH 07209",2026-01-10T22:15:11.541399
+id,name,contactInfo,address
+SUP1,Supplier 1,supplier1@demo.com | (593)684-4983x70673,"USNV Watts, FPO AE 59343"
+SUP2,Supplier 2,supplier2@demo.com | 741.452.6862x110,"00943 Butler Gardens, Pattonborough, SD 41124"
+SUP3,Supplier 3,supplier3@demo.com | 515.402.1264,"303 Sharon Crescent, South Davidfurt, MI 31393"
+SUP4,Supplier 4,supplier4@demo.com | 001-462-448-6985,"707 Gail Stravenue Apt. 204, North James, GA 08891"
+SUP5,Supplier 5,supplier5@demo.com | 621-524-3861x6834,"14046 Campbell Island, Michaelchester, IA 59740"
+SUP6,Supplier 6,supplier6@demo.com | +1-766-695-1683x6920,"8028 Ruiz Fields, South Matthew, GA 57404"

@@ -1,31 +1,31 @@
-id,name,categoryId,supplierId,brand,unit,sku,price,stockQuantity,reorderLevel,createdAt
-PROD1,Product 1,CAT6,SUP1,Nova,box,SKU-0001,8.63,90,14,2026-01-10T22:15:11.544828
-PROD2,Product 2,CAT6,SUP1,Acme,ltr,SKU-0002,103.12,159,11,2026-01-10T22:15:11.544849
-PROD3,Product 3,CAT1,SUP1,Pioneer,pcs,SKU-0003,36.7,149,27,2026-01-10T22:15:11.544860
-PROD4,Product 4,CAT2,SUP6,Zenith,box,SKU-0004,99.23,159,24,2026-01-10T22:15:11.544869
-PROD5,Product 5,CAT5,SUP3,Nova,ltr,SKU-0005,122.37,21,20,2026-01-10T22:15:11.544879
-PROD6,Product 6,CAT3,SUP2,Acme,pcs,SKU-0006,36.22,106,22,2026-01-10T22:15:11.544887
-PROD7,Product 7,CAT1,SUP3,Orbit,pcs,SKU-0007,127.89,174,33,2026-01-10T22:15:11.544895
-PROD8,Product 8,CAT4,SUP5,Acme,kg,SKU-0008,23.1,116,36,2026-01-10T22:15:11.544903
-PROD9,Product 9,CAT6,SUP5,Pioneer,box,SKU-0009,133.39,112,32,2026-01-10T22:15:11.544911
-PROD10,Product 10,CAT1,SUP1,Acme,box,SKU-0010,100.88,94,37,2026-01-10T22:15:11.544920
-PROD11,Product 11,CAT1,SUP4,Orbit,box,SKU-0011,45.31,182,21,2026-01-10T22:15:11.544928
-PROD12,Product 12,CAT3,SUP2,Vertex,pcs,SKU-0012,102.18,199,29,2026-01-10T22:15:11.544936
-PROD13,Product 13,CAT6,SUP2,Nova,ltr,SKU-0013,82.45,82,22,2026-01-10T22:15:11.544944
-PROD14,Product 14,CAT3,SUP6,Vertex,kg,SKU-0014,104.78,76,36,2026-01-10T22:15:11.544952
-PROD15,Product 15,CAT1,SUP2,Zenith,kg,SKU-0015,124.16,100,12,2026-01-10T22:15:11.544960
-PROD16,Product 16,CAT2,SUP5,Nova,ltr,SKU-0016,132.07,100,22,2026-01-10T22:15:11.544968
-PROD17,Product 17,CAT6,SUP4,Nova,kg,SKU-0017,25.72,55,33,2026-01-10T22:15:11.544976
-PROD18,Product 18,CAT5,SUP4,Orbit,box,SKU-0018,135.18,122,14,2026-01-10T22:15:11.544984
-PROD19,Product 19,CAT5,SUP4,Acme,box,SKU-0019,18.18,32,30,2026-01-10T22:15:11.544991
-PROD20,Product 20,CAT2,SUP6,Zenith,ltr,SKU-0020,66.21,36,29,2026-01-10T22:15:11.544999
-PROD21,Product 21,CAT4,SUP5,Acme,pcs,SKU-0021,41.46,161,31,2026-01-10T22:15:11.545015
-PROD22,Product 22,CAT5,SUP3,Acme,kg,SKU-0022,116.45,107,23,2026-01-10T22:15:11.545023
-PROD23,Product 23,CAT2,SUP4,Pioneer,box,SKU-0023,5.47,87,26,2026-01-10T22:15:11.545031
-PROD24,Product 24,CAT1,SUP6,Pioneer,box,SKU-0024,48.27,183,14,2026-01-10T22:15:11.545039
-PROD25,Product 25,CAT3,SUP2,Acme,kg,SKU-0025,83.21,155,25,2026-01-10T22:15:11.545047
-PROD26,Product 26,CAT1,SUP1,Nova,pcs,SKU-0026,139.72,98,17,2026-01-10T22:15:11.545055
-PROD27,Product 27,CAT5,SUP1,Acme,box,SKU-0027,17.42,144,14,2026-01-10T22:15:11.545063
-PROD28,Product 28,CAT6,SUP4,Orbit,ltr,SKU-0028,142.29,62,40,2026-01-10T22:15:11.545071
-PROD29,Product 29,CAT2,SUP5,Nova,kg,SKU-0029,114.51,196,22,2026-01-10T22:15:11.545078
-PROD30,Product 30,CAT6,SUP6,Zenith,pcs,SKU-0030,59.15,152,17,2026-01-10T22:15:11.545086
+id,name,categoryId,brand,price,stockQuantity,supplierId,sku,description,reorderLevel,createdAt
+PROD1,Product 1,CAT6,Nova,8.63,90,SUP1,SKU-0001,Stand place there kid money agreement loss people require change.,17,2026-01-10T22:55:11.549860
+PROD2,Product 2,CAT2,Acme,19.86,159,SUP6,SKU-0002,Treatment water bed blood her song agency down.,28,2026-01-10T22:55:11.549935
+PROD3,Product 3,CAT4,Nova,9.32,75,SUP1,SKU-0003,Keep wonder board better that admit.,26,2026-01-10T22:55:11.549984
+PROD4,Product 4,CAT5,Vertex,86.38,186,SUP1,SKU-0004,Factor boy especially reach see part where lose control.,27,2026-01-10T22:55:11.550030
+PROD5,Product 5,CAT4,Acme,70.14,91,SUP2,SKU-0005,Law south product wind face world guess eye medical.,34,2026-01-10T22:55:11.550076
+PROD6,Product 6,CAT2,Nova,66.28,91,SUP6,SKU-0006,Pressure tree use energy herself someone bit account page.,16,2026-01-10T22:55:11.550120
+PROD7,Product 7,CAT3,Orbit,18.45,44,SUP1,SKU-0007,Star indicate two fact bring.,37,2026-01-10T22:55:11.550160
+PROD8,Product 8,CAT3,Vertex,43.36,31,SUP5,SKU-0008,Occur represent white left under treatment end.,24,2026-01-10T22:55:11.550200
+PROD9,Product 9,CAT5,Acme,146.1,116,SUP1,SKU-0009,Office pull bar box trial then enter.,27,2026-01-10T22:55:11.550242
+PROD10,Product 10,CAT3,Pioneer,94.69,112,SUP6,SKU-0010,Himself choice fall notice wide responsibility.,16,2026-01-10T22:55:11.550282
+PROD11,Product 11,CAT6,Orbit,11.64,78,SUP1,SKU-0011,Behavior join wear garden phone.,12,2026-01-10T22:55:11.550322
+PROD12,Product 12,CAT2,Vertex,60.12,136,SUP1,SKU-0012,Her region low pattern game character affect interview appear.,36,2026-01-10T22:55:11.550364
+PROD13,Product 13,CAT3,Vertex,58.68,73,SUP2,SKU-0013,Measure method focus herself card girl stop role system score.,18,2026-01-10T22:55:11.550404
+PROD14,Product 14,CAT6,Vertex,98.97,175,SUP6,SKU-0014,Nature sea few seat.,15,2026-01-10T22:55:11.550442
+PROD15,Product 15,CAT5,Zenith,40.5,138,SUP6,SKU-0015,Son join no manager end positive keep audience trouble.,18,2026-01-10T22:55:11.550481
+PROD16,Product 16,CAT6,Orbit,85.76,195,SUP6,SKU-0016,Blood dream force two wrong in friend.,36,2026-01-10T22:55:11.550521
+PROD17,Product 17,CAT1,Zenith,124.16,100,SUP2,SKU-0017,When option central face somebody particular garden city.,18,2026-01-10T22:55:11.550562
+PROD18,Product 18,CAT1,Vertex,137.4,165,SUP2,SKU-0018,Manage difference western read recognize join.,20,2026-01-10T22:55:11.550602
+PROD19,Product 19,CAT2,Zenith,77.39,184,SUP6,SKU-0019,Several public probably sound community.,14,2026-01-10T22:55:11.550641
+PROD20,Product 20,CAT3,Pioneer,40.76,163,SUP2,SKU-0020,Ground various customer catch although.,18,2026-01-10T22:55:11.550679
+PROD21,Product 21,CAT6,Zenith,67.12,169,SUP5,SKU-0021,Good current road could these high technology.,21,2026-01-10T22:55:11.550737
+PROD22,Product 22,CAT2,Acme,78.88,43,SUP2,SKU-0022,Stay president idea street blue woman.,37,2026-01-10T22:55:11.550785
+PROD23,Product 23,CAT1,Zenith,95.98,194,SUP2,SKU-0023,Wind memory whom must party rather people prevent family discussion.,29,2026-01-10T22:55:11.550824
+PROD24,Product 24,CAT1,Pioneer,60.33,139,SUP4,SKU-0024,Small western mean born forget her.,18,2026-01-10T22:55:11.550862
+PROD25,Product 25,CAT5,Vertex,103.64,49,SUP1,SKU-0025,Player worker just friend six suggest player world another great.,38,2026-01-10T22:55:11.550899
+PROD26,Product 26,CAT5,Acme,116.45,107,SUP3,SKU-0026,Probably expect yourself discover market perform tough.,19,2026-01-10T22:55:11.550940
+PROD27,Product 27,CAT4,Pioneer,70.79,87,SUP2,SKU-0027,Resource its whether finish smile difficult Mrs much glass care group.,34,2026-01-10T22:55:11.550980
+PROD28,Product 28,CAT2,Orbit,137.33,180,SUP5,SKU-0028,Media job media realize century list.,36,2026-01-10T22:55:11.551022
+PROD29,Product 29,CAT6,Orbit,93.3,59,SUP5,SKU-0029,Suffer report off design night those performance.,34,2026-01-10T22:55:11.551062
+PROD30,Product 30,CAT2,Acme,143.26,155,SUP5,SKU-0030,Sure oil say Congress leader.,29,2026-01-10T22:55:11.551102

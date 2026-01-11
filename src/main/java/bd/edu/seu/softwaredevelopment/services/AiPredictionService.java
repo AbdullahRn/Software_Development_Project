@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,8 +18,19 @@ public class AiPredictionService {
     private String aiBaseUrl;
 
     public List<RestockPredictionDto> getRestockPredictions() {
-        String url = aiBaseUrl + "/predict/restock";
-        RestockPredictionDto[] response = restTemplate.getForObject(url, RestockPredictionDto[].class);
-        return Arrays.asList(response);
+        try {
+            String url = aiBaseUrl + "/predict/restock";
+            RestockPredictionDto[] response = restTemplate.getForObject(url, RestockPredictionDto[].class);
+
+            if (response == null) {
+                return Collections.emptyList();
+            }
+
+            return Arrays.asList(response);
+
+        } catch (Exception e) {
+            System.out.println("⚠️ AI service error: " + e.getMessage());
+            return Collections.emptyList();
+        }
     }
 }

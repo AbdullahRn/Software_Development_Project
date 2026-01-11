@@ -103,82 +103,39 @@ def predict_restock():
     daily = daily.dropna()
 
     results = []
-
-    for _, prod in products.iterrows():
-        pid = str(prod["id"])
-        pname = str(prod.get("name", "Unknown"))
+    for _, row in merged.iterrows():
+        avg_sales = float(row.get("avgDailySales", 0))
+        stock_val = row.get("stockQuantity", 0)
 
         try:
-            stock = int(prod.get("stockQuantity", 0))
-        except:
+            stock = int(stock_val)
+        except Exception:
             stock = 0
 
-        product_daily = daily[daily["productId"] == pid]
+        pid = str(row.get("productId"))
+        pname = str(row.get("name", "Unknown"))
 
-        # If no history → skip
-        if product_daily.empty:
-            continue
+        # --- compute restock values ---
+        if avg_sales <= 0:
+            days_left = stock
+            recommended_qty = 0
+        else:
+            days_left = round(stock / avg_sales)
+            recommended_qty = round(avg_sales * 15)
 
-        # Fallback heuristic if no model
-        if model is None:
-            avg_sales = float(product_daily["qty"].mean())
-            if avg_sales <= 0:
-                days_left = stock
-                rec_qty = 0
-            else:
-                days_left = round(stock / avg_sales)
-                rec_qty = round(avg_sales * 15)
+        # ✅ add confidence here
+        confidence = 0.60
+        if model is not None:
+            confidence = 0.85
 
-            results.append({
-                "productId": pid,
-                "productName": pname,
-                "daysUntilStockOut": int(days_left),
-                "recommendedQty": int(rec_qty),
-                "method": "heuristic"
-            })
-            continue
-
-        # ML prediction: predict sales for next 15 days
-        last_row = product_daily.iloc[-1]
-
-        lag1 = last_row["qty"]
-        lag7 = last_row["lag7_avg"]
-        lag30 = last_row["lag30_avg"]
-
-        predicted_15_day_demand = 0
-
-        for i in range(1, 16):
-            future_date = last_date + pd.Timedelta(days=i)
-
-            X_future = pd.DataFrame([{
-                "dayOfWeek": future_date.dayofweek,
-                "dayOfMonth": future_date.day,
-                "month": future_date.month,
-                "lag1": lag1,
-                "lag7_avg": lag7,
-                "lag30_avg": lag30
-            }])
-
-            pred = float(model.predict(X_future)[0])
-            pred = max(pred, 0)
-
-            predicted_15_day_demand += pred
-
-            # update lag rolling approximation
-            lag1 = pred
-            lag7 = (lag7 * 6 + pred) / 7
-            lag30 = (lag30 * 29 + pred) / 30
-
-        avg_daily_pred = predicted_15_day_demand / 15
-        days_left = int(stock / avg_daily_pred) if avg_daily_pred > 0 else stock
-        rec_qty = int(predicted_15_day_demand)
-
+        # ✅ return fields exactly matching RestockPredictionDto
         results.append({
             "productId": pid,
             "productName": pname,
-            "daysUntilStockOut": int(days_left),
-            "recommendedQty": int(rec_qty),
-            "method": "ml_model"
+            "currentStock": stock,
+            "predictedDaysUntilStockout": int(days_left),
+            "recommendedReorderQty": int(recommended_qty),
+            "confidence": float(confidence)
         })
 
     return results

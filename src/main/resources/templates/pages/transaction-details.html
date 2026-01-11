@@ -1,97 +1,71 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<div th:fragment="content">
 
-    <!-- Message -->
-    <p class="message" th:if="${param.message}" th:text="${param.message}"></p>
-    <p class="error-message" th:if="${param.error}" th:text="${param.error}"></p>
+    <h2 style="margin-bottom: 20px;">Transaction Details</h2>
 
-    <div class="transaction-details-page" th:if="${transaction != null}">
+    <div class="card" style="padding: 20px; border-radius: 12px; background: #222; color: #eee;">
 
-        <!-- Transaction base information -->
-        <div class="section-card">
-            <h2>Transaction Information</h2>
+        <p><b>ID:</b> <span th:text="${transaction.id}"></span></p>
+        <p><b>Type:</b> <span th:text="${transaction.transactionType}"></span></p>
+        <p><b>Status:</b> <span th:text="${transaction.status}"></span></p>
+        <p><b>Total Products:</b> <span th:text="${transaction.totalProducts}"></span></p>
+        <p><b>Total Price:</b> <span th:text="${transaction.totalPrice}"></span></p>
 
-            <p><b>Type:</b> <span th:text="${transaction.transactionType}"></span></p>
-            <p><b>Status:</b> <span th:text="${transaction.status}"></span></p>
-            <p><b>Description:</b> <span th:text="${transaction.description}"></span></p>
-            <p><b>Note:</b> <span th:text="${transaction.note}"></span></p>
-            <p><b>Total Products:</b> <span th:text="${transaction.totalProducts}"></span></p>
-            <p><b>Total Price:</b> <span th:text="${transaction.totalPrice}"></span></p>
-            <p><b>Created At:</b> <span th:text="${#dates.format(transaction.createdAt,'yyyy-MM-dd HH:mm')}"></span></p>
+        <p><b>Discount:</b>
+            <span th:text="${transaction.discount != null ? transaction.discount : 0}"></span>
+        </p>
 
-            <p th:if="${transaction.updatedAt != null}">
-                <b>Updated At:</b>
-                <span th:text="${#dates.format(transaction.updatedAt,'yyyy-MM-dd HH:mm')}"></span>
-            </p>
+        <p><b>Promotion:</b>
+            <span th:text="${transaction.promotion != null and transaction.promotion ? 'Yes' : 'No'}"></span>
+        </p>
+
+        <p><b>Sale Date:</b>
+            <span th:text="${transaction.saleDate != null ? transaction.saleDate : 'N/A'}"></span>
+        </p>
+
+        <p><b>Created At:</b>
+            <span th:text="${transaction.createdAt != null ? #temporals.format(transaction.createdAt, 'yyyy-MM-dd HH:mm') : 'N/A'}"></span>
+        </p>
+
+        <hr style="margin: 20px 0; border-color: #444;" />
+
+        <h4>Product Info</h4>
+        <p><b>Name:</b> <span th:text="${product != null ? product.name : 'N/A'}"></span></p>
+        <p><b>SKU:</b> <span th:text="${product != null ? product.sku : 'N/A'}"></span></p>
+        <p><b>Price:</b> <span th:text="${product != null ? product.price : 'N/A'}"></span></p>
+
+        <hr style="margin: 20px 0; border-color: #444;" />
+
+        <h4>User Info</h4>
+        <p><b>Name:</b> <span th:text="${user != null ? user.name : 'N/A'}"></span></p>
+        <p><b>Email:</b> <span th:text="${user != null ? user.email : 'N/A'}"></span></p>
+
+        <hr style="margin: 20px 0; border-color: #444;" />
+
+        <div th:if="${supplier != null}">
+            <h4>Supplier Info</h4>
+            <p><b>Name:</b> <span th:text="${supplier.name}"></span></p>
+            <p><b>Contact:</b> <span th:text="${supplier.contactInfo}"></span></p>
+            <p><b>Address:</b> <span th:text="${supplier.address}"></span></p>
         </div>
 
-        <!-- Product information -->
-        <div class="section-card">
-            <h2>Product Information</h2>
+        <hr style="margin: 20px 0; border-color: #444;" />
 
-            <p><b>Name:</b> <span th:text="${transaction.product.name}"></span></p>
-            <p><b>SKU:</b> <span th:text="${transaction.product.sku}"></span></p>
-            <p><b>Price:</b> <span th:text="${transaction.product.price}"></span></p>
-            <p><b>Stock Quantity:</b> <span th:text="${transaction.product.stockQuantity}"></span></p>
-            <p><b>Description:</b> <span th:text="${transaction.product.description}"></span></p>
+        <form method="post" th:action="@{/transaction/update-status}">
+            <input type="hidden" name="transactionId" th:value="${transaction.id}" />
 
-            <img th:if="${transaction.product.imageUrl != null}"
-                 th:src="${transaction.product.imageUrl}"
-                 th:alt="${transaction.product.name}"
-                 class="product-image"/>
-        </div>
+            <label style="font-weight: bold;">Update Status:</label>
+            <select name="status" style="padding: 8px; border-radius: 6px; margin: 10px 0;">
+                <option value="PENDING">PENDING</option>
+                <option value="COMPLETED">COMPLETED</option>
+                <option value="CANCELLED">CANCELLED</option>
+            </select>
 
-        <!-- User information -->
-        <div class="section-card">
-            <h2>User Information</h2>
+            <button type="submit"
+                    style="padding: 10px 15px; border: none; border-radius: 6px; background: #0066ff; color: white;">
+                Update
+            </button>
+        </form>
 
-            <p><b>Name:</b> <span th:text="${transaction.user.name}"></span></p>
-            <p><b>Email:</b> <span th:text="${transaction.user.email}"></span></p>
-            <p><b>Phone Number:</b> <span th:text="${transaction.user.phoneNumber}"></span></p>
-            <p><b>Role:</b> <span th:text="${transaction.user.role}"></span></p>
-        </div>
-
-        <!--  Supplier information -->
-        <div class="section-card" th:if="${transaction.supplier != null}">
-            <h2>Supplier Information</h2>
-
-            <p><b>Name:</b> <span th:text="${transaction.supplier.name}"></span></p>
-            <p><b>Contact Info:</b> <span th:text="${transaction.supplier.contactInfo}"></span></p>
-            <p><b>Address:</b> <span th:text="${transaction.supplier.address}"></span></p>
-        </div>
-
-        <!--  UPDATING TRANSACTION STATUS -->
-        <div class="section-card transaction-status-update">
-            <form th:action="@{/transaction/update-status}" method="post">
-
-                <input type="hidden" name="transactionId" th:value="${transaction.id}"/>
-
-                <label>Status: </label>
-
-                <select name="status" th:value="${transaction.status}">
-                    <option value="PENDING" th:selected="${transaction.status == 'PENDING'}">PENDING</option>
-                    <option value="PROCESSING" th:selected="${transaction.status == 'PROCESSING'}">PROCESSING</option>
-                    <option value="COMPLETED" th:selected="${transaction.status == 'COMPLETED'}">COMPLETED</option>
-                    <option value="CANCELLED" th:selected="${transaction.status == 'CANCELLED'}">CANCELLED</option>
-                </select>
-
-                <button type="submit">Update Status</button>
-
-            </form>
-        </div>
-
-        <a th:href="@{/transaction}">
-            <button type="button" style="margin-top:15px;">Back</button>
-        </a>
-
-    </div>
-
-    <!--  If transaction not found -->
-    <div class="transaction-details-page" th:if="${transaction == null}">
-        <p class="error-message">Transaction not found!</p>
-
-        <a th:href="@{/transaction}">
-            <button type="button" style="margin-top:15px;">Back</button>
-        </a>
     </div>
 
 </div>
